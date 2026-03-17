@@ -1,0 +1,94 @@
+package fp.dam.java.model;
+
+import java.util.Objects;
+
+public class Product {
+	
+	private String code;
+	private String name;
+	private String productLine;
+	private String scale;
+	private String vendor;
+	private String description;
+	private int stock;
+	private float buyPrice;
+	private float msrp;
+
+	public Product(String csvLine) {
+		String [] tokens = csvLine.split("\\|");
+		code = tokens[0];
+		name = tokens[1];
+		productLine = tokens[2];
+		scale = tokens[3];
+		vendor = tokens[4];
+		description = tokens[5];
+		stock = Integer.parseInt(tokens[6]);
+		buyPrice = Float.parseFloat(tokens[7]);
+		msrp = Float.parseFloat(tokens[8]);	
+	}	
+	
+	public String getCode() {
+		return code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getProductLine() {
+		return productLine;
+	}
+
+	public String getScale() {
+		return scale;
+	}
+
+	public String getVendor() {
+		return vendor;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public float getBuyPrice() {
+		return buyPrice;
+	}
+
+	public float getMsrp() {
+		return msrp;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(buyPrice, code, description, msrp, name, productLine, scale, stock, vendor);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		return Float.floatToIntBits(buyPrice) == Float.floatToIntBits(other.buyPrice)
+				&& Objects.equals(code, other.code) && Objects.equals(description, other.description)
+				&& Float.floatToIntBits(msrp) == Float.floatToIntBits(other.msrp) && Objects.equals(name, other.name)
+				&& Objects.equals(productLine, other.productLine) && Objects.equals(scale, other.scale)
+				&& stock == other.stock && Objects.equals(vendor, other.vendor);
+	}
+
+	@Override
+	public String toString() {
+		return "Product [code=" + code + ", name=" + name + ", productLine=" + productLine + ", scale=" + scale
+				+ ", vendor=" + vendor + ", description=" + description + ", stock=" + stock + ", buyPrice=" + buyPrice
+				+ ", msrp=" + msrp + "]";
+	}
+	
+}
